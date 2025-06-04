@@ -1,5 +1,4 @@
 const request = require('supertest');
-const app = require('../../src/index');
 const cache = require('../../src/config/cache');
 const { provider } = require('../../src/utils/blockchain');
 
@@ -7,8 +6,19 @@ jest.mock('../../src/config/cache');
 jest.mock('../../src/utils/blockchain');
 
 describe('API Integration Tests', () => {
-  const validApiKey = process.env.API_KEYS?.split(',')[0] || 'test-key';
+  let app;
+  const validApiKey = 'test-key';
   const testAddress = '0x742d35Cc6634C0532925a3b844Bc9e7595f89026';
+
+  beforeAll(() => {
+    // Set test environment
+    process.env.API_KEYS = validApiKey;
+    process.env.NODE_ENV = 'test';
+    process.env.USE_REDIS = 'false';
+    
+    // Require app after setting environment
+    app = require('../../src/index');
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();

@@ -67,14 +67,16 @@ app.get('/health', (req, res) => {
 app.use(errorHandler);
 
 /**
- * Start the HTTP server
+ * Start the HTTP server only if not in test environment
  */
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`);
-  logger.info(`API Documentation available at http://localhost:${PORT}/api-docs`);
-  logger.info(`Health check available at http://localhost:${PORT}/health`);
-  logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    logger.info(`Server running on port ${PORT}`);
+    logger.info(`API Documentation available at http://localhost:${PORT}/api-docs`);
+    logger.info(`Health check available at http://localhost:${PORT}/health`);
+    logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+}
 
 // Export app for testing
 module.exports = app;

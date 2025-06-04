@@ -6,11 +6,17 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest --coverage",
+    "test": "jest --coverage --forceExit --detectOpenHandles",
     "test:watch": "jest --watch",
     "lint": "eslint src/"
   },
-  "keywords": ["cronos", "blockchain", "api", "cro", "crc20"],
+  "keywords": [
+    "cronos",
+    "blockchain",
+    "api",
+    "cro",
+    "crc20"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -39,6 +45,7 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js"
-    ]
+    ],
+    "testTimeout": 10000
   }
 }

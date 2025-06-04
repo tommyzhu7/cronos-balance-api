@@ -136,6 +136,14 @@ if (process.env.USE_REDIS === 'true') {
      * @returns {Promise<void>}
      */
     flush: async () => nodeCache.flushAll(),
+    
+    /**
+     * Close cache (cleanup timers)
+     * @returns {Promise<void>}
+     */
+    close: async () => {
+      nodeCache.close();
+    }
   };
 }
 
